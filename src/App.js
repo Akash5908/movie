@@ -7,9 +7,16 @@ const API_URL = "http://www.omdbapi.com?apikey=b94e910b";
 const App = () => {
     const [movies, setMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const sendtext = (e) => {
+        let code = e.keyCode || e.which;
+        console.log(e)
+        if (code === 13) {
+            searchMovies(searchTerm);
 
+        }
+    }
     useEffect(() => {
-        searchMovies("Batman");
+        searchMovies("");
     }, []);
 
     const searchMovies = async (title) => {
@@ -26,7 +33,8 @@ const App = () => {
                 <input
                     placeholder="Search for movies"
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)} />
+                    onChange={(e) => { setSearchTerm(e.target.value) }}
+                    onKeyPress={(e) => sendtext(e)} />
                 <img
                     src={SearchIcon}
                     alt="search"
